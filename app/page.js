@@ -12,6 +12,10 @@ export default function Home() {
   ])
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  
+  const clearMessages = () => {
+    setMessages([]);
+  }
 
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return;
@@ -106,8 +110,8 @@ export default function Home() {
               <Box
                 bgcolor={
                   message.role === 'assistant'
-                    ? 'primary.main'
-                    : 'secondary.main'
+                    ? 'grey'
+                    : 'green'
                 }
                 color="white"
                 borderRadius={16}
@@ -119,6 +123,14 @@ export default function Home() {
           ))}
         </Stack>
         <Stack direction={'row'} spacing={2}>
+          <Button
+          variant="contained" 
+          onClick={clearMessages}
+          disabled={isLoading}
+          style={{backgroundColor: "green", padding: "0px 32px"}}
+          >
+          Clear
+          </Button>
           <TextField
             label="Message"
             fullWidth
@@ -131,6 +143,7 @@ export default function Home() {
             variant="contained" 
             onClick={sendMessage}
             disabled={isLoading}
+            style={{backgroundColor: "green"}}
           >
             {isLoading ? 'Sending...' : 'Send'}
           </Button>
